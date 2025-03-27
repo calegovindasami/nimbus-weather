@@ -5,8 +5,9 @@ PROJECT_LOGO           =
 OUTPUT_DIRECTORY       = docs
 
 # Input files
-INPUT                  = .
-FILE_PATTERNS          = *.c *.h
+INPUT                  = . README.md
+USE_MDFILE_AS_MAINPAGE = README.md
+FILE_PATTERNS          = *.c *.h *.md
 RECURSIVE              = YES
 EXCLUDE                = bin/
 EXCLUDE_PATTERNS       = */\.*
@@ -18,11 +19,21 @@ HTML_OUTPUT            = html
 HTML_THEME             = doxygen-awesome
 HTML_EXTRA_STYLESHEET  = doxygen-awesome-css/doxygen-awesome.css doxygen-awesome-css/doxygen-awesome-sidebar-only.css
 
+# Navigation options
+GENERATE_TREEVIEW      = YES
+DISABLE_INDEX          = NO
+FULL_SIDEBAR           = YES
+HTML_NAVBAR_ENABLED    = YES
+
 # Extraction settings
 EXTRACT_ALL            = YES
 EXTRACT_PRIVATE        = YES
 EXTRACT_STATIC         = YES
 EXTRACT_LOCAL_CLASSES  = YES
+SHOW_NAMESPACES        = YES
+SHOW_FILES             = YES
+SHOW_DIRECTORIES       = YES
+SHOW_INCLUDES          = YES
 
 # Diagrams and graphs
 HAVE_DOT               = YES
@@ -31,6 +42,9 @@ CALL_GRAPH             = YES
 CALLER_GRAPH           = YES
 DOT_IMAGE_FORMAT       = svg
 INTERACTIVE_SVG        = YES
+COLLABORATION_GRAPH    = YES
+CLASS_GRAPH            = YES
+DIRECTORY_GRAPH        = YES
 
 # Advanced appearance options
 HTML_COLORSTYLE_HUE    = 220
@@ -46,7 +60,13 @@ TOC_INCLUDE_HEADINGS   = 5
 SUBGROUPING            = YES
 GROUP_GRAPHS           = YES
 SOURCE_BROWSER         = YES
+SOURCE_TOOLTIPS        = YES
+VERBATIM_HEADERS       = YES
 
 # Search engine
 SEARCHENGINE           = YES
 SERVER_BASED_SEARCH    = NO
+
+# Index options
+ALPHABETICAL_INDEX     = YES
+COLS_IN_INDEX          = 3
