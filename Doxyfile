@@ -16,6 +16,7 @@ GENERATE_HTML          = YES
 GENERATE_LATEX         = NO
 HTML_OUTPUT            = html
 HTML_THEME             = doxygen-awesome
+HTML_EXTRA_STYLESHEET  = doxygen-awesome-css/doxygen-awesome.css doxygen-awesome-css/doxygen-awesome-sidebar-only.css
 
 # Extraction settings
 EXTRACT_ALL            = YES
