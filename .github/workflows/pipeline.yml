@@ -1,0 +1,76 @@
+name: Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  # First job: Run tests
+  test:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up environment
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential
+      
+      - name: Build and run tests
+        run: |
+          mkdir -p bin
+          make test
+          
+      - name: Clean up build artifacts
+        if: always()
+        run: make clean
+
+  # Second job: Generate documentation (only runs if tests pass)
+  documentation:
+    name: Generate Documentation
+    needs: test  # This creates the dependency - only run if test job succeeds
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      
+      - name: Set up documentation build environment
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y doxygen graphviz
+      
+      - name: Check for Doxyfile
+        id: check_doxyfile
+        run: |
+          if [ -f "Doxyfile" ]; then
+            echo "doxyfile_exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "doxyfile_exists=false" >> $GITHUB_OUTPUT
+            doxygen -g
+            sed -i 's/PROJECT_NAME.*=.*/PROJECT_NAME = "Nimbus Weather CLI"/' Doxyfile
+            sed -i 's/OUTPUT_DIRECTORY.*=.*/OUTPUT_DIRECTORY = docs/' Doxyfile
+            sed -i 's/EXTRACT_ALL.*=.*/EXTRACT_ALL = YES/' Doxyfile
+            sed -i 's/RECURSIVE.*=.*/RECURSIVE = YES/' Doxyfile
+            sed -i 's/GENERATE_LATEX.*=.*/GENERATE_LATEX = NO/' Doxyfile
+            sed -i 's/HAVE_DOT.*=.*/HAVE_DOT = YES/' Doxyfile
+            sed -i 's/UML_LOOK.*=.*/UML_LOOK = YES/' Doxyfile
+          fi
+      
+      - name: Generate documentation
+        run: |
+          doxygen Doxyfile
+          touch docs/html/.nojekyll
+      
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/html
+          force_orphan: true
+          commit_message: "docs: update documentation [skip ci]"
