@@ -7,3 +7,4 @@ GENERATE_HTML          = YES
 GENERATE_LATEX         = NO
 HAVE_DOT               = YES
 UML_LOOK               = YES
+HTML_THEME            = doxygen-awesome
