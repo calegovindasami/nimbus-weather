@@ -1,0 +1,72 @@
+# Project information
+PROJECT_NAME           = "Nimbus Weather CLI"
+PROJECT_BRIEF          = "A command-line interface for weather information"
+PROJECT_LOGO           = 
+OUTPUT_DIRECTORY       = docs
+
+# Input files
+INPUT                  = . README.md
+USE_MDFILE_AS_MAINPAGE = README.md
+FILE_PATTERNS          = *.c *.h *.md
+RECURSIVE              = YES
+EXCLUDE                = bin/
+EXCLUDE_PATTERNS       = */\.*
+
+# Output options
+GENERATE_HTML          = YES
+GENERATE_LATEX         = NO
+HTML_OUTPUT            = html
+HTML_THEME             = doxygen-awesome
+HTML_EXTRA_STYLESHEET  = doxygen-awesome-css/doxygen-awesome.css doxygen-awesome-css/doxygen-awesome-sidebar-only.css
+
+# Navigation options
+GENERATE_TREEVIEW      = YES
+DISABLE_INDEX          = NO
+FULL_SIDEBAR           = YES
+HTML_NAVBAR_ENABLED    = YES
+
+# Extraction settings
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = YES
+EXTRACT_STATIC         = YES
+EXTRACT_LOCAL_CLASSES  = YES
+SHOW_NAMESPACES        = YES
+SHOW_FILES             = YES
+SHOW_DIRECTORIES       = YES
+SHOW_INCLUDES          = YES
+
+# Diagrams and graphs
+HAVE_DOT               = YES
+UML_LOOK               = YES
+CALL_GRAPH             = YES
+CALLER_GRAPH           = YES
+DOT_IMAGE_FORMAT       = svg
+INTERACTIVE_SVG        = YES
+COLLABORATION_GRAPH    = YES
+CLASS_GRAPH            = YES
+DIRECTORY_GRAPH        = YES
+
+# Advanced appearance options
+HTML_COLORSTYLE_HUE    = 220
+HTML_COLORSTYLE_SAT    = 100
+HTML_COLORSTYLE_GAMMA  = 80
+HTML_TIMESTAMP         = YES
+HTML_DYNAMIC_SECTIONS  = YES
+ENUM_VALUES_PER_LINE   = 1
+MARKDOWN_SUPPORT       = YES
+TOC_INCLUDE_HEADINGS   = 5
+
+# Grouping options
+SUBGROUPING            = YES
+GROUP_GRAPHS           = YES
+SOURCE_BROWSER         = YES
+SOURCE_TOOLTIPS        = YES
+VERBATIM_HEADERS       = YES
+
+# Search engine
+SEARCHENGINE           = YES
+SERVER_BASED_SEARCH    = NO
+
+# Index options
+ALPHABETICAL_INDEX     = YES
+COLS_IN_INDEX          = 3
